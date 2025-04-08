@@ -2,10 +2,9 @@ import os
 
 import telebot
 from requests import get
+from config import API_WEATHER, API_TOKEN
 import json
 
-API_TOKEN = os.environ['TELEBOT_TOKEN']
-API = os.environ['WEATHER_TOKEN']
 bot = telebot.TeleBot(API_TOKEN)
 
 def parse_json(json_data):
@@ -24,7 +23,7 @@ def parse_json(json_data):
 def get_city(message):
     city = message.text
 
-    url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API}&lang=ru'
+    url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_WEATHER}&lang=ru'
     responce = get(url)
 
     parsed_json = parse_json(json.loads(responce.text))
